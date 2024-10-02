@@ -7,7 +7,7 @@ import {
   getOneWeekAgoDateTime,
   getYesterdayDateTime,
 } from "./DateHandler";
-import { Image } from "@rneui/themed";
+import { Image, Text, View } from "react-native";
 
 export function Vice({ viceid }: { viceid: number }) {
   const [yesterdayCount, setYesterdayCount] = useState(
@@ -21,8 +21,19 @@ export function Vice({ viceid }: { viceid: number }) {
   );
 
   return (
-    <>
-      <Image src={require("../assets/images/nicotine.png")}></Image>
+    <View
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        height: "75%",
+      }}
+    >
+      <Text style={{ fontSize: 36 }}>Cigarettes</Text>
+      <Image
+        source={require("..\\assets\\images\\nicotine.png")}
+        style={{ height: "25%", width: "50%" }}
+      />
       <DisplayAmount amount={yesterdayCount} />
       <DisplayAmount amount={lastWeekCount} />
       <DisplayAmount amount={lastMonthCount} />
@@ -36,6 +47,6 @@ export function Vice({ viceid }: { viceid: number }) {
           setLastMonthCount((prevCount) => prevCount + amount);
         }}
       />
-    </>
+    </View>
   );
 }
