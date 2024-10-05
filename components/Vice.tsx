@@ -8,6 +8,7 @@ import {
   getYesterdayDateTime,
 } from "./DateHandler";
 import { Image, Text, View } from "react-native";
+import { UndoButton } from "./UndoButton";
 
 export function Vice({ viceid }: { viceid: number }) {
   const [yesterdayCount, setYesterdayCount] = useState(
@@ -19,6 +20,18 @@ export function Vice({ viceid }: { viceid: number }) {
   const [lastMonthCount, setLastMonthCount] = useState(
     getCount({ viceId: viceid, dateFrom: getOneMonthAgoDateTime() })
   );
+
+  function updateAllCounts() {
+    setYesterdayCount(
+      getCount({ viceId: viceid, dateFrom: getYesterdayDateTime() })
+    );
+    setLastWeekCount(
+      getCount({ viceId: viceid, dateFrom: getOneWeekAgoDateTime() })
+    );
+    setLastMonthCount(
+      getCount({ viceId: viceid, dateFrom: getOneMonthAgoDateTime() })
+    );
+  }
 
   return (
     <View
@@ -37,16 +50,23 @@ export function Vice({ viceid }: { viceid: number }) {
       <DisplayAmount amount={yesterdayCount} />
       <DisplayAmount amount={lastWeekCount} />
       <DisplayAmount amount={lastMonthCount} />
-
-      <IncreaseButton
-        viceId={viceid}
-        amount={1}
-        callbackOnUpdate={(amount: number) => {
-          setYesterdayCount((prevCount) => prevCount + amount);
-          setLastWeekCount((prevCount) => prevCount + amount);
-          setLastMonthCount((prevCount) => prevCount + amount);
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+          alignContent: "space-evenly",
+          width: "100%",
         }}
-      />
+      >
+        <UndoButton viceId={viceid} callbackOnUpdate={updateAllCounts} />
+        <IncreaseButton
+          viceId={viceid}
+          amount={1}
+          callbackOnUpdate={updateAllCounts}
+        />
+        {/* TODO update all amounts on update */}
+      </View>
     </View>
   );
 }

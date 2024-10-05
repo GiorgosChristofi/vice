@@ -51,6 +51,16 @@ export function persistUse({ viceId, amount }: viceAndAmount) {
   }
 }
 
+export function removeLastAddition({ viceId }: { viceId: number }) {
+  const statement = db.prepareSync(
+    `DELETE FROM uses WHERE uses.id = (SELECT MAX(uses.id) FROM uses WHERE uses.vice_id = $vice_id)`
+  );
+  let result = statement.executeSync({
+    $vice_id: viceId,
+  });
+  console.log(result);
+}
+
 export function getCount({ viceId, dateFrom, dateTo }: viceAndDate) {
   let statement;
   let result; //: Iterable<unknown>;

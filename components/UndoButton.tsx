@@ -8,15 +8,13 @@ import {
 import { viceAndAmount } from "@/app/types";
 import { Text } from "react-native";
 import { useState } from "react";
-import { getCount, persistUse } from "./Repository";
+import { getCount, removeLastAddition } from "./Repository";
 
-export function IncreaseButton({
+export function UndoButton({
   viceId,
-  amount,
   callbackOnUpdate,
 }: {
   viceId: number;
-  amount: number;
   callbackOnUpdate: () => void;
 }) {
   const style = StyleSheet.create({
@@ -28,20 +26,17 @@ export function IncreaseButton({
   });
 
   return (
-    <View style={{ backgroundColor: "blue", borderRadius: 50 }}>
+    <View style={{ backgroundColor: "red", borderRadius: 50 }}>
       <Pressable
         onPressOut={() => {
-          persistUse({ viceId, amount });
-          {
-            /*</View>TODO actually check that the amount was added to the DB before updating*/
-          }
+          removeLastAddition({ viceId });
           callbackOnUpdate();
         }}
       >
         <Image
           style={style.icon}
           source={{
-            uri: "https://img.icons8.com/?size=100&id=3220&format=png&color=ffffff",
+            uri: "https://img.icons8.com/?size=100&id=3059&format=png&color=ffffff",
           }}
         />
       </Pressable>
