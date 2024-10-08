@@ -7,8 +7,9 @@ import {
   getOneWeekAgoDateTime,
   getYesterdayDateTime,
 } from "./DateHandler";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View, StyleSheet } from "react-native";
 import { UndoButton } from "./UndoButton";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function Vice({ viceid }: { viceid: number }) {
   const [yesterdayCount, setYesterdayCount] = useState(
@@ -33,15 +34,44 @@ export function Vice({ viceid }: { viceid: number }) {
     );
   }
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "orange",
+    },
+    background: {
+      ...StyleSheet.absoluteFillObject, // Ensures the gradient covers the entire screen
+    },
+    button: {
+      padding: 15,
+      alignItems: "center",
+      borderRadius: 5,
+    },
+    text: {
+      backgroundColor: "transparent",
+      fontSize: 15,
+      color: "#fff",
+    },
+  });
+
   return (
     <View
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        height: "75%",
+        height: "100%",
+        paddingVertical: "10%",
       }}
     >
+      <LinearGradient
+        // Background Linear Gradient
+        colors={["#FFCDCD", "#FF9B44"]}
+        style={styles.background}
+      />
+
       <Text style={{ fontSize: 36 }}>Cigarettes</Text>
       <Image
         source={require("..\\assets\\images\\nicotine.png")}
