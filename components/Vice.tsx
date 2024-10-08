@@ -77,9 +77,18 @@ export function Vice({ viceid }: { viceid: number }) {
         source={require("..\\assets\\images\\nicotine.png")}
         style={{ height: "25%", width: "50%" }}
       />
-      <DisplayAmount amount={yesterdayCount} />
-      <DisplayAmount amount={lastWeekCount} />
-      <DisplayAmount amount={lastMonthCount} />
+      <DisplayAmount
+        amount={yesterdayCount}
+        src="https://img.icons8.com/ios/100/calendar-1.png"
+      />
+      <DisplayAmount
+        amount={lastWeekCount}
+        src="https://img.icons8.com/ios/100/calendar-7.png"
+      />
+      <DisplayAmount
+        amount={lastMonthCount}
+        src="https://img.icons8.com/ios/100/calendar-31.png"
+      />
       <View
         style={{
           display: "flex",

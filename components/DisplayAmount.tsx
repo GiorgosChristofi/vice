@@ -1,7 +1,13 @@
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import { Divider } from "@rneui/themed";
 
-export function DisplayAmount({ amount }: { amount: number }) {
+export function DisplayAmount({
+  amount,
+  src,
+}: {
+  amount: number;
+  src: string;
+}) {
   return (
     <>
       <Divider style={{ width: "100%" }} color="black" />
@@ -9,13 +15,25 @@ export function DisplayAmount({ amount }: { amount: number }) {
         <View
           style={{
             borderRadius: 50,
-            width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "black", fontSize: 30 }}>{amount}</Text>
+          <Image
+            source={{ uri: src }}
+            style={{ width: 25, height: 25, position: "absolute", left: -50 }}
+          />
+          <Text
+            style={{
+              color: "black",
+              fontSize: 30,
+              width: 100,
+              textAlign: "center",
+            }}
+          >
+            {amount}
+          </Text>
         </View>
       </View>
     </>
